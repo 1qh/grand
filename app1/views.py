@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Room
+from .models import Room, Topic
 from .forms import RoomForm
 
 def index(request):
@@ -9,7 +9,8 @@ def index(request):
 
 def room(request, pk):
     r = Room.objects.get(id=pk)
-    context = {'room': r}
+    topics = Topic.objects.all()
+    context = {'room': r, 'topics': topics}
     return render(request, 'app1/room.html', context)
 
 def create_room(request):
